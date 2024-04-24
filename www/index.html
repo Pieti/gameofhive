@@ -4,7 +4,7 @@
 <script src="wasm_exec.js"></script>
 <script>
 (async () => {
-  const resp = await fetch('ebitengine-gameofhive.wasm');
+  const resp = await fetch('gameofhive.wasm');
   if (!resp.ok) {
     const pre = document.createElement('pre');
     pre.innerText = await resp.text();
