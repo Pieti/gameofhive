@@ -41,7 +41,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: wasm
-        path: ebitengine-gameofhive.wasm
+        path: gameofhive.wasm
 
     - name: Test
       run: go test -v ./...
