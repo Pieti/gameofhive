@@ -1,7 +1,8 @@
 # Game of Hive
 
-Game of life, on a hexgrid, with BEES
+A version of [Conway's Game of life](https://en.wikipedia.org/wiki/Conway's_Game_of_Life). On a hexgrid. With BEES!
 
+Play it [here](https://pieti.github.io/gameofhive/)
 
 ## Requirements
 
