@@ -1,19 +1,16 @@
 package main
 
 import (
-	"github.com/hajimehoshi/ebiten/v2"
 	"log"
-)
 
-const (
-	ScreenWidth  = 1024
-	ScreenHeight = 1024
+	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/pieti/gameofhive/goh"
 )
 
 func main() {
-	g := NewGame()
+	g := goh.NewGame()
 
-	ebiten.SetWindowSize(ScreenWidth, ScreenHeight)
+	ebiten.SetWindowSize(goh.ScreenWidth, goh.ScreenHeight)
 	ebiten.SetWindowTitle("Game of Hive")
 
 	if err := ebiten.RunGame(g); err != nil {
