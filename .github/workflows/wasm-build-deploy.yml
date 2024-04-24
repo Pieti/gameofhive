@@ -35,7 +35,7 @@ jobs:
       run: go build -v ./...
       
     - name: Build Web Assembly artifact
-      run: GOOS=js GOARCH=wasm go build -o ebitengine-gameofhive.wasm github.com/pieti/gameofhive
+      run: GOOS=js GOARCH=wasm go build -o gameofhive.wasm github.com/pieti/gameofhive
 
     - name: Upload Web Assembly artifact
       uses: actions/upload-artifact@v3
