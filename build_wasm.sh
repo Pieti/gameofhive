@@ -1,1 +1,1 @@
-GOOS=js GOARCH=wasm go build -o gameofhive.wasm github.com/pieti/gameofhive
+GOOS=js GOARCH=wasm go build -o www/gameofhive.wasm

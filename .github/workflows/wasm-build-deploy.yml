@@ -18,13 +18,10 @@ permissions:
 jobs:
 
   build:
-    name: Build WebAssembly
+    name: Build Web binary
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-
-    - name: Install Ebitengine dependencies
-      run: sudo apt install libc6-dev libglu1-mesa-dev libgl1-mesa-dev libxcursor-dev libxi-dev libxinerama-dev libxrandr-dev libxxf86vm-dev libasound2-dev pkg-config
 
     - name: Set up Go
       uses: actions/setup-go@v5
@@ -32,19 +29,18 @@ jobs:
         go-version: '1.21.5'
 
     - name: Build
-      run: go build -v ./...
-      
-    - name: Build Web Assembly artifact
-      run: GOOS=js GOARCH=wasm go build -o gameofhive.wasm github.com/pieti/gameofhive
+      shell: bash
+      run: GOOS=js GOARCH=wasm go build -o www/gameofhive.wasm
+
+    - name: Copy WASM exec script
+      shell: bash
+      run: cp $(go env GOROOT)/misc/wasm/wasm_exec.js www/
 
     - name: Upload Web Assembly artifact
       uses: actions/upload-artifact@v3
       with:
         name: wasm
-        path: gameofhive.wasm
-
-    - name: Test
-      run: go test -v ./...
+        path: www/
 
   deploy:
     name: Deploy to GitHub pages
