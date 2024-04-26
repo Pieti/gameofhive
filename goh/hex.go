@@ -5,10 +5,8 @@ import (
 	"math"
 )
 
-type Point struct {
-	x, y float32
-}
-
+// Hex space is represented by a cube coordinate system
+// where q + r + s = 0
 type Hex struct {
 	q int
 	r int
@@ -24,16 +22,8 @@ var hex_directions [6]Hex = [6]Hex{
 	{0, 1, -1},
 }
 
-func (h1 *Hex) Add(h2 Hex) Hex {
+func AddHexes(h1, h2 Hex) Hex {
 	return Hex{h1.q + h2.q, h1.r + h2.r, h1.s + h2.s}
-}
-
-func (h *Hex) Neighbors() [6]Hex {
-	var neighbors [6]Hex
-	for i, d := range hex_directions {
-		neighbors[i] = h.Add(d)
-	}
-	return neighbors
 }
 
 func (h *Hex) ToString() string {
@@ -46,7 +36,7 @@ type FractionalHex struct {
 	s float32
 }
 
-func (fh *FractionalHex) Round() *Hex {
+func (fh *FractionalHex) Round() Hex {
 	q := int(math.RoundToEven(float64(fh.q)))
 	r := int(math.RoundToEven(float64(fh.r)))
 	s := int(math.RoundToEven(float64(fh.s)))
@@ -61,5 +51,5 @@ func (fh *FractionalHex) Round() *Hex {
 	} else {
 		s = -q - r
 	}
-	return &Hex{q, r, s}
+	return Hex{q, r, s}
 }

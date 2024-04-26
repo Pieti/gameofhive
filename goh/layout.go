@@ -1,6 +1,13 @@
 package goh
 
-import "math"
+import (
+	"math"
+)
+
+// Coordinates in 2D space
+type Point struct {
+	x, y float32
+}
 
 type Orientation struct {
 	f0, f1, f2, f3 float32
@@ -53,7 +60,7 @@ func (l *Layout) HexToPixel(hex *Hex) Point {
 	return Point{x + l.origin.x, y + l.origin.y}
 }
 
-func (l *Layout) PixelToHex(p Point) FractionalHex {
+func (l *Layout) PixelToHex(p Point) Hex {
 	ori := &l.orientation
 	pt := Point{
 		x: (p.x - l.origin.x) / l.size.x,
@@ -61,7 +68,9 @@ func (l *Layout) PixelToHex(p Point) FractionalHex {
 	}
 	q := ori.b0*pt.x + ori.b1*pt.y
 	r := ori.b2*pt.x + ori.b3*pt.y
-	return FractionalHex{q, r, (-q - r)}
+
+	fhex := FractionalHex{q, r, (-q - r)}
+	return fhex.Round()
 }
 
 func (l *Layout) HexCornerOffset(corner int) Point {
